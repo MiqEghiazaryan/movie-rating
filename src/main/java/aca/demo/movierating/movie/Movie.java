@@ -13,6 +13,8 @@ import java.beans.ConstructorProperties;
 @EqualsAndHashCode
 @Slf4j
 @AllArgsConstructor
+
+
 public class Movie {
     String title;
     Genre genre;
