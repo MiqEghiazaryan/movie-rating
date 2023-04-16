@@ -28,8 +28,7 @@ public class MovieRatingApplication {
 		List<Movie> romanceMovies = movieService.search(Genre.ROMANCE);
 		log.debug("Find romance movies: {}",romanceMovies);
 
-		movieService.create(new CreateMovie("Forrest Gump", Genre.COMEDY));
-		movieService.create(new CreateMovie("American Beauty", Genre.HORROR));
+
 
 
 
