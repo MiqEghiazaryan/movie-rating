@@ -29,9 +29,6 @@ public class MovieRatingApplication {
 		log.debug("Find romance movies: {}",romanceMovies);
 
 
-
-
-
 	}
 
 }

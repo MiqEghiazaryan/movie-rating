@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create your movie here!</title>
 </head>
 <body>
-
+<h2>Create movie:</h2>
+<form action="/movies" method="post">
+    <label>Title</label>
+    <input type="title" name="title" />
+    <br/>
+    <label>Genre</label>
+    <select name="genre">
+        <option value="DRAMA">Drama</option>
+        <option value="COMEDY">Comedy</option>
+        <option value="HORROR">Horror</option>
+        <option value="ROMANCE">Romance</option>
+    </select>
+    <br/>
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>
