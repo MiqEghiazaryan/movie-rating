@@ -32,19 +32,13 @@ public class MovieController {
 
         log.info("Received request to create movie with title {} and genre {}", title, genre);
 
-        try {
             movieService.create(new CreateMovie(title, genre));
             response.setStatus(202);
             response.setContentType("text/plain");
             response.getWriter().println("New Movie created!");
-        } catch (IllegalArgumentException e) {
-            log.error("Error creating movie: {}", e.getMessage());
-            response.setStatus(400);
-            response.setContentType("text/plain");
-            response.getWriter().println(e.getMessage());
-        }
+   }
 
-    }
+
     @GetMapping("movies")
     public void search(HttpServletRequest request, HttpServletResponse response) {
 
@@ -59,7 +53,7 @@ public class MovieController {
         }
 
         try {
-            response.setStatus(HttpServletResponse.SC_OK);
+            response.setStatus(200);
             response.setContentType("text/plain");
             response.getWriter().println(responseBody);
         } catch (IOException e) {
