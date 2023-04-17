@@ -25,39 +25,34 @@ public class MovieController {
 
 
     @PostMapping("movies")
-    public void create(HttpServletRequest request, HttpServletResponse response)throws IOException {
+    public void create(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String title = request.getParameter("title");
         String genreString = request.getParameter("genre");
         Genre genre = Genre.valueOf(genreString);
 
         log.info("Received request to create movie with title {} and genre {}", title, genre);
 
-            movieService.create(new CreateMovie(title, genre));
-            response.setStatus(202);
-            response.setContentType("text/plain");
-            response.getWriter().println("New Movie created!");
-   }
+        movieService.create(new CreateMovie(title, genre));
+        response.setStatus(202);
+        response.setContentType("text/plain");
+        response.getWriter().println("New Movie created!");
+    }
 
 
     @GetMapping("movies")
-    public void search(HttpServletRequest request, HttpServletResponse response) {
+    public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String genreParam = request.getParameter("genre");
-        Genre genre = Genre.valueOf(genreParam.toUpperCase());
+        String genreParam = request.getParameter("genre").toUpperCase();
+        Genre genre = Genre.valueOf(genreParam);
+        log.info("Genre - {}",genreParam);
 
         List<Movie> movies = movieService.search(genre);
 
-        StringBuilder responseBody = new StringBuilder("Movies with genre " + genre + ":\n");
+        response.setStatus(200);
+        response.setContentType("text/plain");
         for (Movie movie : movies) {
-            responseBody.append("Title: ").append(movie.getTitle()).append(", Genre: ").append(movie.getGenre()).append("\n");
-        }
+            response.getWriter().println(movie);
 
-        try {
-            response.setStatus(200);
-            response.setContentType("text/plain");
-            response.getWriter().println(responseBody);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
