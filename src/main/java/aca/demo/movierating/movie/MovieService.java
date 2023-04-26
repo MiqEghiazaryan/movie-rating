@@ -16,7 +16,7 @@ public class MovieService {
 
     public List<Movie> search(Genre genre) {
         log.debug("Searching for movies by genre: {}",genre);
-        return movieRepository.findByGenre(genre);
+        return movieRepository.search(genre);
 
     }
 
