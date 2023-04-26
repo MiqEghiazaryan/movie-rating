@@ -1,8 +1,6 @@
 package aca.demo.movierating.endpoint;
 
-import aca.demo.movierating.movie.CreateMovie;
-import aca.demo.movierating.movie.Genre;
-import aca.demo.movierating.movie.Movie;
+
 import aca.demo.movierating.movie.MovieService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
-import java.util.List;
 
 
 @Controller
@@ -26,33 +23,14 @@ public class MovieController {
 
     @PostMapping("movies")
     public void create(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String title = request.getParameter("title");
-        String genreString = request.getParameter("genre");
-        Genre genre = Genre.valueOf(genreString);
 
-        log.info("Received request to create movie with title {} and genre {}", title, genre);
-
-        movieService.create(new CreateMovie(title, genre));
-        response.setStatus(202);
-        response.setContentType("text/plain");
-        response.getWriter().println("New Movie created!");
     }
 
 
     @GetMapping("movies")
     public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String genreParam = request.getParameter("genre").toUpperCase();
-        Genre genre = Genre.valueOf(genreParam);
-        log.info("Genre - {}",genreParam);
 
-        List<Movie> movies = movieService.search(genre);
 
-        response.setStatus(200);
-        response.setContentType("text/plain");
-        for (Movie movie : movies) {
-            response.getWriter().println(movie);
-
-        }
     }
 }
