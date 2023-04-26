@@ -31,7 +31,7 @@ public class MovieRepository {
 
     public void save(CreateMovie createMovie) {
         log.debug("Creating movie: {}", createMovie);
-        Movie movie = new Movie(createMovie.getTitle(), createMovie.getGenre());
+        Movie movie = new Movie(createMovie.getId(),createMovie.getTitle(), createMovie.getGenre(),createMovie.getDirector(),createMovie.getRating());
         movies.add(movie);
     }
 }

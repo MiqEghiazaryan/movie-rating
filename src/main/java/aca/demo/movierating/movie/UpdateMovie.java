@@ -6,21 +6,22 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDate;
 
+
 @Value
 @Builder
 @Jacksonized
 
-public class CreateMovie {
+public class UpdateMovie {
 
     Long id;
+
     String title;
+
     Genre genre;
 
-    LocalDate releasdAat;
+    LocalDate releasedAt;
 
     String director;
 
     double rating;
-
-
 }
