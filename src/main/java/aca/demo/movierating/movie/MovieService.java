@@ -38,7 +38,7 @@ public class MovieService {
 
     }
 
-    void update(Long id, UpdateMovie updateMovie) {
+    public void update(Long id, UpdateMovie updateMovie) {
         log.debug("MovieService updateing:{}",updateMovie);
         Movie movie = getById(id);
         if (movie == null) {
@@ -48,7 +48,7 @@ public class MovieService {
         }
     }
 
-    void delete(Long id) {
+    public void delete(Long id) {
         Movie movie = getById(id);
         if(movie == null){
             throw new MovieNotFoundException("Movie not Found");
