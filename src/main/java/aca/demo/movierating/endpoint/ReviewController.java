@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.util.List;
 
 
 @RestController
@@ -47,5 +49,18 @@ public class ReviewController {
     public void delete(@PathVariable Long id,Long movieId) {
         log.debug("delete() called with id = {},movieId = {}",id,movieId);
         reviewService.delete(id,movieId);
+    }
+
+    @GetMapping
+    public List<Review> search(@RequestParam(required = false) String description,
+                              @RequestParam(required = false) Instant updatedBefore,
+                              @RequestParam(required = false) Instant updatedAfter,
+                              @RequestParam(required = false) Long userId,
+                              @RequestParam(required = false) double ratingHigherThan,
+                              @RequestParam(required = false) double ratingLowerThan) {
+        log.debug("search() called with description = {}, updatedBefore = {}, updatedAfter = {}, userId = {},ratingHigherThan = {},ratingLowerThan = {}",
+                description,updatedBefore,updatedAfter,userId,ratingHigherThan,ratingLowerThan);
+
+        return reviewService.search(description, updatedBefore, updatedAfter, userId, ratingHigherThan, ratingLowerThan);
     }
 }
