@@ -14,14 +14,16 @@ public class ReviewRepository {
         log.debug("Finding review by - movieId: {}, and reviewId: {}", movieId, id);
         return reviews.stream().filter(r -> r.getMovieId().equals(movieId) && r.getId().equals(id)).findFirst();
     }
-    public List<Review> search(String description, Instant updatedBefore, Instant updatedAfter, Long userId) {
-        log.debug("find review by description - {},updatedBefore - {},updatedAfter,userId - {}",
-                description,updatedBefore,updatedAfter,userId);
+    public List<Review> search(String description, Instant updatedBefore, Instant updatedAfter, Long userId,double ratingHigherThan,double ratingLowerThan) {
+        log.debug("find review by description - {},updatedBefore - {},updatedAfter,userId - {},ratingHigherThan -{},ratingLowerThan-{}",
+                description,updatedBefore,updatedAfter,userId,ratingHigherThan,ratingLowerThan);
         return reviews.stream()
                 .filter(review -> description == null || review.getDescription().equals(description))
                 .filter(review -> updatedBefore == null || review.getUpdatedAt().isBefore(updatedBefore))
                 .filter(review -> updatedAfter == null || review.getUpdatedAt().isAfter(updatedAfter))
                 .filter(review -> userId == null || review.getUserId().equals(userId))
+                .filter(review -> ratingHigherThan == 0.0 || Double.compare(review.getRating(), ratingHigherThan) == 1)
+                .filter(review -> ratingLowerThan == 0.0 || Double.compare(review.getRating(), ratingLowerThan) == -1)
                 .toList();
     }
     public void persist(Review review) {

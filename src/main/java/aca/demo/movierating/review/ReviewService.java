@@ -27,10 +27,10 @@ public class ReviewService {
         return reviewRepository.findById(movieId, reviewId).orElseThrow(() -> new ReviewNotFoundException("Review not found"));
     }
 
-    public List<Review> search(String description, Instant updatedBefore, Instant updatedAfter, Long userId) {
-        log.debug("ReviewService searching reviews by parameters - description: {}, updatedBefore: {}, updatedAfter: {}, userId: {}",
-                description, updatedBefore, updatedAfter, userId);
-        return reviewRepository.search(description, updatedBefore, updatedAfter, userId);
+    public List<Review> search(String description, Instant updatedBefore, Instant updatedAfter, Long userId,double ratingHigherThan,double ratingLowerThan) {
+        log.debug("ReviewService searching reviews by parameters - description: {}, updatedBefore: {}, updatedAfter: {}, userId: {},ratingHigherThan: {},ratingLowerThan: {}",
+                description, updatedBefore, updatedAfter, userId,ratingHigherThan,ratingLowerThan);
+        return reviewRepository.search(description, updatedBefore, updatedAfter, userId,ratingHigherThan,ratingLowerThan);
     }
 
     public  void create(Long movieId,CreateReview createReview) {
