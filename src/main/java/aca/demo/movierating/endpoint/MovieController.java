@@ -55,9 +55,4 @@ public class MovieController {
                 genre, title, releasedBefore, releasedAfter);
         return movieService.search(genre, title, releasedBefore, releasedAfter);
     }
-
-
-
-
-
 }
